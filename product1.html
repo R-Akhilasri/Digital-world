@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Digital World</title>
+    <link rel="stylesheet" type="text/css" href="p1.css">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+</head>
+<body>
+<header>
+<h2>Digital world</h2>
+ <nav>
+ 	<ul>
+ 		<li><a href="home.html">Home</a></li>
+ 		<li><a href="product.html">Products</a></li>
+ 		<li><a href="ac.html">About us</a></li>
+ 		<li><a href="contact.html">contact us</a></li>
+ 		<li><a href="registration.html">login</a></li>
+ 	</ul>
+ </nav>
+</header>
+<main>
+    <section>
+        <div class="product-image-container" id="imageContainer">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnAIpFJb0wwXqflxA_auGukmdCNsO3RBD2Fg&s" height="370px" width="370px" alt="Product" class="product-image" id="productImage">
+        </div>
+        <div>
+            <h3>LODVIE Ergonomic 2.4G Wireless Mouse</h3><br><br>
+            <h5>Product description</h5>
+            <br>
+            <p>Wireless Mouse with Wireless Possibility 2.4 G Wireless Transmission Technology Wide Compatibility Comfortable Hand Feeling Energy-saving Specification Color: Black Mouse size: 103.5X 70.5 X 38.6mm Number of the Key: 6 Buttons DPI: 800-1200-1600-2000-2400 Power Source: 1*PCS AA Battery(Not included). The USB Receiver is Stored on the back of the Wireless Mouse,beside the battery. This wireless mouse can be compatible with window 10/7/8, Lunix, Mac ,Chrombook.The computer mouse With 1* AA battery(not include) ,almost 16 months life time Come Here The forward and back buttons are not available for Mac OS. The usb reciever is stored on the back of the mouse. This laptop mouse is powered by the 1*AA battery( not included). Please check the size before purchase if you mind it. What You Can Get 1 X Wireless Mouse 1 X USB Receiver 1 X User Manual</p>
+            <br>
+            <span>Rs.1000</span><br><br>
+            <button type="submit" id="button">Buy now</button>
+             <button class="add-to-cart-btn" id="addToCartBtn">Add to Cart</button>
+
+        </div>
+    </section>
+    <section>
+        <div>
+            <iframe width="370" height="370" src="https://www.youtube.com/embed/zKaRboaYdws?si=ukV-ZlxKcKGn8EZN" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+        <div id="commentForm">
+            <h3>Add your comment</h3>
+            <br>
+            <input type="text" name="comment" id="comment" >
+            <input type="submit" name="" style="padding: 1px; color: gainsboro; background-color:steelblue; border: 1px solid black ; width: 60px;">
+            <br>
+            <br>
+
+            <label><ion-icon name="person-circle-outline"></ion-icon>aliya</label><p style="margin-left: 15px;">woo 0o0</p> <br>
+            <label><ion-icon name="person-circle-outline"></ion-icon>mia</label><p style="margin-left: 15px;">cool...</p><br>
+            <label><ion-icon name="person-circle-outline"></ion-icon>nithi</label><p style="margin-left: 15px;">good 0~0</p><br>
+            <label><ion-icon name="person-circle-outline"></ion-icon>lisa</label><p style="margin-left: 15px;">super</p><br>
+            <div class="comment-list" id="commentList"></div>
+        </div>
+    </section>
+</main>
+</body>
+
+    <script>
+document.addEventListener('DOMContentLoaded', () => {
+    const cartContainer = document.getElementById('cartContainer');
+    
+    function getCart() {
+        const cart = localStorage.getItem('cart');
+        return cart ? JSON.parse(cart) : [];
+    }
+
+    function saveCart(cart) {
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
+    function updateCartUI() {
+        const cart = getCart();
+        cartContainer.innerHTML = '';
+        cart.forEach(item => {
+            const cartItem = document.createElement('div');
+            cartItem.classList.add('cart-item');
+            cartItem.innerHTML = `
+                <p>${item.name} - Rs.${item.price} x ${item.quantity}</p>
+                <button class="update-quantity" data-product-id="${item.id}">Update Quantity</button>
+                <button class="remove-item" data-product-id="${item.id}">Remove</button>
+            `;
+            cartContainer.appendChild(cartItem);
+        });
+
+        // Attach event listeners to update and remove buttons
+        document.querySelectorAll('.update-quantity').forEach(button => {
+            button.addEventListener('click', () => {
+                const productId = button.getAttribute('data-product-id');
+                const newQuantity = prompt('Enter new quantity:');
+                if (newQuantity && !isNaN(newQuantity) && newQuantity > 0) {
+                    updateCartItem(productId, parseInt(newQuantity, 10));
+                }
+            });
+        });
+
+        document.querySelectorAll('.remove-item').forEach(button => {
+            button.addEventListener('click', () => {
+                const productId = button.getAttribute('data-product-id');
+                removeCartItem(productId);
+            });
+        });
+    }
+
+    function addCartItem(product) {
+        const cart = getCart();
+        const existingItemIndex = cart.findIndex(item => item.id === product.id);
+        if (existingItemIndex > -1) {
+            // Update quantity if item already exists
+            cart[existingItemIndex].quantity += product.quantity;
+        } else {
+            // Add new item
+            cart.push(product);
+        }
+        saveCart(cart);
+        updateCartUI();
+    }
+
+    function updateCartItem(productId, quantity) {
+        const cart = getCart();
+        const itemIndex = cart.findIndex(item => item.id === productId);
+        if (itemIndex > -1) {
+            if (quantity <= 0) {
+                // Remove item if quantity is 0 or less
+                cart.splice(itemIndex, 1);
+            } else {
+                cart[itemIndex].quantity = quantity;
+            }
+            saveCart(cart);
+            updateCartUI();
+        }
+    }
+
+    function removeCartItem(productId) {
+        const cart = getCart();
+        const updatedCart = cart.filter(item => item.id !== productId);
+        saveCart(updatedCart);
+        updateCartUI();
+    }
+
+    // Attach event listeners to Add to Cart buttons
+    document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+        button.addEventListener('click', () => {
+            const productId = button.getAttribute('data-product-id');
+            const productName = button.getAttribute('data-product-name');
+            const price = parseFloat(button.getAttribute('data-price'));
+            const quantity = 1; // Default quantity
+
+            const product = {
+                id: productId,
+                name: productName,
+                price: price,
+                quantity: quantity
+            };
+
+            addCartItem(product);
+        });
+    });
+
+    // Initial load of cart
+    updateCartUI();
+});
+</script>
+<script type="text/javascript" src="p1.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</html>

@@ -1,0 +1,205 @@
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+body{
+	font-family:Arial ;
+	font-size: 20px;
+	background-color: #f4f4f4;
+}
+header{
+ background-color: #333;
+ color: black;
+ padding: 20px;
+ justify-content: space-between;
+ align-items: center;
+ display: flex;
+}
+h2{
+	color: white;
+}
+nav ul{
+	list-style-type: none;
+}
+nav ul li{
+	display: inline;
+	margin-right: 30px;
+}
+nav ul li a{
+	color: white;
+	text-decoration: none;
+}main{
+ padding: 20px;
+}
+#hero{
+  text-align: center;
+  margin: 10px 0;
+  padding: 100px;
+  background-color: wheat;
+  background-image: url('https://cdn.custom-cursor.com/collections/141/cover-collection-gadget-and-devices.png');
+  color: #fff;
+  background-size: auto;
+}
+#hero h1{
+	font-size: 40px;
+	margin-bottom: 20px;
+	color: black;
+	padding: 10px;
+	background-color: ghostwhite;
+}
+#hero p{
+	font-size: 20px;
+	margin-bottom: 30px;
+}
+.bttn{
+    color: #fff;
+    background-color: #ff4d4d;
+    text-decoration: none;
+    display: inline-block;
+    padding: 10px 20px;
+} 
+section#menu,#list{
+	display: flex;
+	margin: 10px;
+}
+section#menu div,#list div{
+	margin: 10px;
+	padding: 10px;
+}
+section#menu p,#list p{
+	font-size: 15px;
+}
+section#menu span,#list span{
+	color: blue;
+	font-size: 15px;
+}
+footer{
+	text-align: center;
+	color: #fff;
+	background-color: #333;
+	width: 100%;
+	bottom: 0;
+	padding: 5px 0;
+	position: fixed;
+}
+#list2{
+	width: 100%;
+	background-color: lightgrey ;
+	padding: 30px;
+}
+#list2 .b{
+	background-color: whitesmoke;
+ padding: 15px;
+}
+#list2 .c{
+    display: flex;justify-content: space-between;padding: 10px;
+}
+a{
+	text-decoration: none;
+	color: black;
+}
+.list3{
+	margin: 15px 15px;
+	
+}
+.list3 h3{
+	padding: 15px;
+}
+.list3 div{
+	width: 100%;
+	display: flex;
+justify-content: space-between;
+}
+.list4{
+	margin: 20px 0px;
+}
+.list4 div{
+	width: 100%;
+	padding: 10px;
+	text-align: center;
+	margin: 20px 0;
+	background-color: silver;
+	font-size: 18px;
+}
+
+
+#orderHistory {
+    padding: 20px;
+}
+
+#filters {
+    margin-bottom: 20px;
+}
+
+#search {
+    padding: 10px;
+    font-size: 16px;
+}
+
+#statusFilter {
+    padding: 10px;
+    font-size: 16px;
+    margin-left: 10px;
+}
+
+#orderTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#orderTable th, #orderTable td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+#orderTable th {
+    background-color: #f4f4f4;
+}
+
+#pagination {
+    margin-top: 20px;
+    text-align: center;
+}
+
+#pagination button {
+    padding: 10px 20px;
+    margin: 0 5px;
+}
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
